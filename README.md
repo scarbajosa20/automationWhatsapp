@@ -6,8 +6,17 @@
 
 
 1. Creamos la carpeta y abrimos la carpeta en mi caso la abro con VSC
-    <b>mkdir AutomationWhatsapp</b>
-    <b> code . </b>
+    
+
+```
+mkdir AutomationWhatsapp
+cd AutomationWhatsapp
+code . 
+```
+
+
 2. Despues abrimos el terminal en VSC e instalamos selenium (acordaros de tener el Python en el path)
-    <b> pip install selenium </b>
-3. Ya podeis comenzar a teclar!!!    
+
+    `pip install selenium` 
+    
+3. Ya podeis comenzar a teclar!!! 
