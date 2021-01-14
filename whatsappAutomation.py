@@ -25,19 +25,17 @@ class BotWhatsapp:
         chrome_options.add_argument(r'--user-data-dir=C:\Users\Sergi\AppData\Local\Google\Chrome\User Data\Wtsp')## para guardar la sesion y no tener que iniciar sesion cada vez que ejecutas
         chrome_options.binary_location = "E:\Sistema\Archivos de programa\Google\Chrome\Application\chrome.exe" ##La ruta del chrome.exe
         self.browser = webdriver.Chrome(options=chrome_options, executable_path=self.path_driver, )
+        self.browser.maximize_window()
         self.browser.get(self.base_url)
+       
         try:
-            find=False
-            print("hey")
-            sleep(10)
-            while not find:
-                if (self.browser.find_element_by_class_name(("_1awRl"))):
-                    find = True
+            WebDriverWait(self.browser,self.timeout).until(
+                EC.presence_of_all_elements_located(
+                (By.CLASS_NAME, self.base_input)))
             print("Si he entrado")
             return True
         except Exception as e:
             print(e)
-            print('Mensaje enviado')
             self.browser.quit()
             return False
 
@@ -56,7 +54,6 @@ class BotWhatsapp:
         except Exception  as e:
             print(e)
             print("Nose encontro conctacto.")
-            print('Mensaje enviado')
             self.browser.quit()
             return
         messages = message.split("\n")
@@ -66,6 +63,7 @@ class BotWhatsapp:
             sleep(1)
             send_msg.send_keys(Keys.ENTER)
             print('Mensaje enviado')
+            sleep(10)
             self.browser.quit()
             return True
 
@@ -79,6 +77,7 @@ class BotWhatsapp:
                     (By.XPATH, self.firs_contact)))
             if vali_.is_displayed():
                 search.send_keys(Keys.ENTER)
+                sleep(5)
                 return True
         except Exception as e:
             print(e)
@@ -88,7 +87,7 @@ class BotWhatsapp:
         self.start_browser()
 
 prueba = BotWhatsapp()
-contact="Alan"
-message="Hola que tal?"
+contact="python"
+message="Es un mensaje automatizado para mostralo en likedIn"
 prueba.send_message_to_contact(contact,message)
 
